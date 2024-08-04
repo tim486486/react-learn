@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
-import BlogList from './BlogList'
 import React from 'react'
+import BlogList from './BlogList'
+import useFetch from './useFetch'
 
 const Home = () => {
   // const [blogs, setBlogs] = useState([
@@ -8,45 +8,30 @@ const Home = () => {
   //   {title: 'Learn typescript', body: 'lorem ipsum...', author: 'luigi', id: 2},
   //   {title: 'Learn react', body: 'lorem ipsum...', author: 'mario', id: 3}
   // ])
-  const [blogs, setBlogs] = useState([] as { 
-    title: string; 
-    body: string; 
-    author: string; 
-    id: number }[]);
-  const [isPending, setIsPending] = useState(true);
-  const [error, setError] = useState(null)
+  // const [blogs, setBlogs] = useState([] as { 
+  //   title: string; 
+  //   body: string; 
+  //   author: string; 
+  //   id: number }[]);
+  // const [isPending, setIsPending] = useState(true);
+  // const [error, setError] = useState(null)
 
-  const [name, setName] = useState('mario');
+  // const [name, setName] = useState('mario');
+
+  // const handleDelete = (id: number) => {
+  //   if (blogs !== null){
+  //     const newBlogs = blogs.filter(blog => blog.id !== id)
+  //     setBlogs(newBlogs)
+  //   }    
+  // }
 
   const handleDelete = (id: number) => {
-    if (blogs !== null){
-      const newBlogs = blogs.filter(blog => blog.id !== id)
-      setBlogs(newBlogs)
-    }    
+    //dummy
   }
 
   // to start json server: npx json-server --watch data/db.json --port 8000
 
-  useEffect(() => {
-    setTimeout(() => {
-      fetch('http://localhost:8000/blogs')
-        .then(res => {
-          if (!res.ok){
-            throw Error('Could not fetch the data for that resource');
-          }
-          return res.json()
-        })
-        .then(data => {
-          setBlogs(data);
-          setIsPending(false);
-          setError(null)
-        })
-        .catch((err: any) => {
-          setIsPending(false)
-          setError(err.message)
-        })
-    }, 1000);
-  }, []);
+  const { data: blogs, isPending, error } = useFetch('http://localhost:8000/blogs');
   
   return (
     <div className="home">
@@ -54,8 +39,8 @@ const Home = () => {
       {isPending && <div>Loading...</div>}
       {blogs.length > 0 && <BlogList blogs = {blogs} title="All Blogs" handleDelete={handleDelete}></BlogList>}
       {/* <BlogList blogs = {blogs.filter((blog) => blog.author === 'mario')} title="Mario's Blogs"></BlogList> */}
-      <button onClick={() => setName('luigi')}> change name </button>
-      <p>{name}</p>
+      {/* <button onClick={() => setName('luigi')}> change name </button> */}
+      {/* <p>{name}</p> */}
     </div>
   );
 }
