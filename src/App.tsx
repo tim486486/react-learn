@@ -1,8 +1,9 @@
-import React from 'react'
 import Navbar from './Navbar'
 import Home from './Home'
 import Create from './Create'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import BlogDetails from './BlogDetails'
+import NotFound from './NotFound'
 
 function App() {
   const title: string = 'Welcome to the new blogging platform!'
@@ -18,6 +19,8 @@ function App() {
           <Routes>
             <Route path="/" element=<Home></Home>></Route>
             <Route path="/create" element=<Create></Create>></Route>
+            <Route path="/blogs/:id" element=<BlogDetails></BlogDetails>></Route>
+            <Route path="*" element=<NotFound></NotFound>></Route>
           </Routes>
           {/* <h1>{title}</h1>
           <p>Liked {likes} times</p> */}

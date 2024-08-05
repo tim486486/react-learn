@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import BlogList from './BlogList'
 import useFetch from './useFetch'
 
@@ -37,7 +37,7 @@ const Home = () => {
     <div className="home">
       {error && <div>{error}</div>}
       {isPending && <div>Loading...</div>}
-      {blogs.length > 0 && <BlogList blogs = {blogs} title="All Blogs" handleDelete={handleDelete}></BlogList>}
+      {blogs && blogs.length > 0 && <BlogList blogs = {blogs} title="All Blogs" handleDelete={handleDelete}></BlogList>}
       {/* <BlogList blogs = {blogs.filter((blog) => blog.author === 'mario')} title="Mario's Blogs"></BlogList> */}
       {/* <button onClick={() => setName('luigi')}> change name </button> */}
       {/* <p>{name}</p> */}
