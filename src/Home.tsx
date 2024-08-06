@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import BlogList from './BlogList'
 import useFetch from './useFetch'
 
+  // to start json server: npx json-server --watch data/db.json --port 8000
+
 const Home = () => {
   // const [blogs, setBlogs] = useState([
   //   {title: 'My new website', body: 'lorem ipsum...', author: 'mario', id: 1},
@@ -28,8 +30,6 @@ const Home = () => {
   const handleDelete = (id: number) => {
     //dummy
   }
-
-  // to start json server: npx json-server --watch data/db.json --port 8000
 
   const { data: blogs, isPending, error } = useFetch('http://localhost:8000/blogs');
   
